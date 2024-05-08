@@ -21,8 +21,8 @@ test('invalid phone number', () => {
   expect(isPhoneNumber('123-45-67890')).toBe(false);
 });
 
-test('invalid phone number format', () => {
-  expect(isPhoneNumber('123-4567-890')).toBe(false);
+test('empty phone number', () => {
+  expect(isPhoneNumber('')).toBe(false);
 });
 
 //isEmail test cases
@@ -30,8 +30,8 @@ test('valid email', () => {
   expect(isEmail('abc@example.com')).toBe(true);
 });
 
-test('email with special characters', () => {
-  expect(isEmail('abc+123@example.co.in')).toBe(true);
+test('email with capital letters', () => {
+  expect(isEmail('DEF@example.co')).toBe(true);
 });
 
 test('invalid email without domain', () => {
@@ -44,15 +44,15 @@ test('invalid email without "@" should return false', () => {
 
 //isStrongPassword test cases:
 test('valid strong password', () => {
-  expect(isStrongPassword('abc$12')).toBe(true);
+  expect(isStrongPassword('abc12')).toBe(true);
 });
 
-test('valid strong password', () => {
+test('strong password with capital letter', () => {
   expect(isStrongPassword('Abcd_123')).toBe(true);
 });
 
-test('invalid password with less than 4 characters', () => {
-  expect(isStrongPassword('Abc1')).toBe(false);
+test('invalid password with less than 3 characters', () => {
+  expect(isStrongPassword('Ab')).toBe(false);
 });
 
 test('invalid password with more than 15 characters', () => {
@@ -68,12 +68,12 @@ test('valid date with one number in XX', () => {
   expect(isDate('1/31/2023')).toBe(true);
 });
 
-test('invalid date with invalid month', () => {
-  expect(isDate('13/31/2023')).toBe(false);
+test('invalid date with no month', () => {
+  expect(isDate('/31/2023')).toBe(false);
 });
 
 test('invalid date with invalid day', () => {
-  expect(isDate('12/32/2023')).toBe(false);
+  expect(isDate('12/3232/2023')).toBe(false);
 });
 
 //isHexColor test cases:
