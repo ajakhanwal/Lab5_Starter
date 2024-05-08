@@ -11,7 +11,6 @@ function init() {
   let synth = window.speechSynthesis;
   let voices = [];
 
-  // Function to populate the voices dropdown
   function populateVoices() {
     voices = synth.getVoices();
     voiceSelect.innerHTML = "";
@@ -23,13 +22,10 @@ function init() {
     });
   }
 
-  // Load voices when page loads
   populateVoices();
 
-  // Listen for changes in voices list
   synth.onvoiceschanged = populateVoices;
 
-  // Function to speak the text
   function speakText() {
     const selectedVoice = voiceSelect.value;
     const utterance = new SpeechSynthesisUtterance(textToSpeakInput.value);
@@ -37,10 +33,8 @@ function init() {
     if (voice) {
       utterance.voice = voice;
       synth.speak(utterance);
-      // Change face to open mouth while speaking
       faceImage.src = "assets/images/smiling-open.png";
       utterance.onend = () => {
-        // Change face back to smiling when speech ends
         faceImage.src = "assets/images/smiling.png";
       };
     } else {
@@ -48,6 +42,5 @@ function init() {
     }
   }
 
-  // Event listener for talk button click
   talkButton.addEventListener("click", speakText);
 }

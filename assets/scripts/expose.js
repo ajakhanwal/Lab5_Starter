@@ -12,23 +12,15 @@ function init() {
 
   hornSelect.addEventListener("change", function () {
     const selectedHorn = hornSelect.value;
-    switch (selectedHorn) {
-      case "air-horn":
-        hornImage.src = "assets/images/air-horn.svg";
-        audioElement.src = "assets/audio/air-horn.mp3";
-        break;
-      case "car-horn":
-        hornImage.src = "assets/images/car-horn.svg";
-        audioElement.src = "assets/audio/car-horn.mp3";
-        break;
-      case "party-horn":
-        hornImage.src = "assets/images/party-horn.svg";
-        audioElement.src = "assets/audio/party-horn.mp3";
-        break;
-      default:
-        hornImage.src = "assets/images/no-image.png";
-        audioElement.src = "";
-        break;
+    if(selectedHorn=="air-horn"){
+      hornImage.src = "assets/images/air-horn.svg";
+      audioElement.src = "assets/audio/air-horn.mp3";
+    }else if(selectedHorn == "car-horn"){
+      hornImage.src = "assets/images/car-horn.svg";
+      audioElement.src = "assets/audio/car-horn.mp3";
+    } else if(selectedHorn == "party-horn"){
+      hornImage.src = "assets/images/party-horn.svg";
+      audioElement.src = "assets/audio/party-horn.mp3";
     }
   });
 
@@ -49,7 +41,8 @@ function init() {
   playButton.addEventListener("click", function () {
     audioElement.play();
     if (hornSelect.value === "party-horn") {
-      confetti.start();
+      const jsConfetti = new JSConfetti();
+      jsConfetti.addConfetti();
     }
   });
 }
